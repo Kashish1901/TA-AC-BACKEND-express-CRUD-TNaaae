@@ -10,8 +10,14 @@ router.get("/new", (req, res) => {
   res.render("userForm.ejs");
 });
 
-router.post("/", (req, res) => {
-  User.create({});
+router.post("/", async (req, res) => {
+  try {
+    console.log(req.body);
+    let user = await User.create(req.body);
+    res.send("User created");
+  } catch (error) {
+    res.send(error);
+  }
 });
 
 router.get("/:id", (req, res) => {
