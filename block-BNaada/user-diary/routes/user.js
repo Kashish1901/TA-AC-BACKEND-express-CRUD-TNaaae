@@ -1,9 +1,14 @@
 var express = require("express");
-
 var router = express.Router();
+var User = require("../models/userSchema");
 
-router.get("/", (req, res) => {
-  res.render("user.ejs", { users: ["user1", "user2", "user3 ", "user4"] });
+router.get("/", async (req, res, next) => {
+  try {
+    var user = await User.findById(req.body);
+    res.render("user.ejs", { users: ["user1", "user2", "user3 ", "user4"] });
+  } catch (err) {
+    next(err);
+  }
 });
 
 router.get("/new", (req, res) => {
@@ -13,9 +18,9 @@ router.get("/new", (req, res) => {
 router.post("/", async (req, res) => {
   try {
     console.log(req.body);
-    let user = await User.create(req.body);
-    res.send("user created");
+    var user = await User.create(req.body);
     res.render("user.ejs");
+    //res.redirect("/users/new");
   } catch (err) {
     console.log(err);
   }
@@ -27,22 +32,15 @@ router.post("/", async (req, res) => {
 //});
 //});
 
-router.get("/", async (req, res) => {
-  try {
-    let user = await User.findById(req.body);
-    res.render("user.ejs");
-  } catch (err) {
-    res.send(err);
-  }
-});
-
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     var id = req.params.id;
-    let user = await User.findById(id);
-    res.render("singleUser.ejs");
+    var user = await User.findById(id);
+    res.render("singleUser.ejs", {
+      users: ["user1", "user2", "user3", "user4"],
+    });
   } catch (err) {
-    res.send(err);
+    next(err);
   }
 });
 
