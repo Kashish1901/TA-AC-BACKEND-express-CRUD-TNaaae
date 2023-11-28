@@ -50,7 +50,7 @@ router.get("/:id/edit", async (req, res) => {
   try {
     var id = req.params.id;
     var user = await User.findById(id);
-    res.render("editUserForm", { user: user });
+    res.render("editUserForm", { user });
   } catch (err) {
     res.send(err);
   }
@@ -60,7 +60,7 @@ router.post("/:id", async (req, res) => {
   try {
     var id = req.params.id;
     var user = await User.findByIdAndUpdate(id, req.body);
-    res.redirect("/books/ + id");
+    res.redirect("/books + id");
   } catch (err) {
     res.send(err);
   }
