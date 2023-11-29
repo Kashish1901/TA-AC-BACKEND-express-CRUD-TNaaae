@@ -32,8 +32,7 @@ router.post("/", async (req, res) => {
 
 router.get("/:id", async (req, res) => {
   try {
-    var id = req.params.id;
-    let user = await User.findById(id);
+    let user = await User.findById(req.params.id);
     res.render("singleUser.ejs", {
       user: { name: "singleUSer", email: "singleUser@gmail.com" },
     });
