@@ -5,7 +5,7 @@ var User = require("../models/user");
 router.get("/", async (req, res) => {
   try {
     var users = await User.find({});
-    console.log(users);
+
     res.render("listUsers.ejs", { users: users });
   } catch (err) {
     res.send(err);
@@ -45,7 +45,7 @@ router.delete("/:id", async (req, res) => {
   try {
     var id = req.params.id;
     var user = await User.findByIdAndDelete(id);
-    console.log(user);
+    res.render("user.ejs");
   } catch (err) {
     res.send(err);
   }
