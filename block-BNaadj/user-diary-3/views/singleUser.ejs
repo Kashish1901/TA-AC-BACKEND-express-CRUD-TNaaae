@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Singleuser Details</h1>
+    <h2><%= user.name %></h2>
+    <h2><%= user.email %></h2>
+    <h3><%= user.address %></h3>
+    <p><%= user.bio %></p>
+    <p><%= user.hobbies %></p>
+
+    <button>
+      <a href="/users/<%= user.id %>">Edit</a>
+    </button>
+    <button>
+      <a href="">Delete</a>
+    </button>
+    <button>
+      <a href="/users">UsersList</a>
+    </button>
+  </body>
+</html>
